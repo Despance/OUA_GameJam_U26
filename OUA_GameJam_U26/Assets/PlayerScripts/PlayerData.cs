@@ -8,6 +8,7 @@ public class PlayerData : MonoBehaviour
     public bool canExtraJump;
     public bool canReverseGravity;
     public bool canShrink;
+    public bool canMovePlatforms;
 
     [Header("Animation States")]
     public bool isFacedRight; //player controller

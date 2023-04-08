@@ -50,7 +50,7 @@ public class PlayerPowers : MonoBehaviour
         //shrink
         
         //move platform
-        if (IsMovingGrounded())
+        if (IsMovingGrounded() && playerData.canMovePlatforms)
         {
             selectedPlatform = movingGroundCheck.rigidbody;
         }

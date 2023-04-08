@@ -155,9 +155,4 @@ public class PlayerController : MonoBehaviour
         }
         //running
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawCube(feet.position, feet.localScale);
-    }
 }
