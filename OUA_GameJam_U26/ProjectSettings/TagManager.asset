@@ -9,6 +9,9 @@ TagManager:
   - YuvEnemy
   - KarEnemy
   - GitGel
+  - MovingGround
+  - MovingPlatformRight
+  - MovingPlatformLeft
   layers:
   - Default
   - TransparentFX

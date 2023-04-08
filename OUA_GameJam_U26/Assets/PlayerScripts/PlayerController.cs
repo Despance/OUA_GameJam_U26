@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeLimit = 0.1f;
     private float coyoteTimer;
     private int extraJumpCounter;
-    private RaycastHit2D groundCheck;
     private Rigidbody2D rb;
     
     private void Start()
@@ -79,7 +78,7 @@ public class PlayerController : MonoBehaviour
         //jump buffer
         
         //coyote time
-        if (isGrounded())
+        if (IsGrounded())
         {
             coyoteTimer = coyoteTimeLimit;
             extraJumpCounter = extraJumpCountLimit; //extra jump
@@ -95,16 +94,33 @@ public class PlayerController : MonoBehaviour
         //jump
         if (coyoteTimer > 0f && jumpBufferTimer > 0f && playerData.canJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            if (playerData.isFacedUp)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -1 * jumpSpeed);
+            }
+            
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            }
+            
             playerData.isJumping = true; //jump state
             playerData.isIdle = false;  //jump state
         }
         //jump
         
         //extra jump
-        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !isGrounded() && extraJumpCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !IsGrounded() && extraJumpCounter > 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * 1.25f);
+            if (playerData.isFacedUp)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed);
+            }
+            
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed);
+            }
             extraJumpCounter--;
         }
         //extra jump
@@ -124,13 +140,25 @@ public class PlayerController : MonoBehaviour
         //running
     }
     
-    private bool isGrounded()
+    private bool IsGrounded()
     {
-        groundCheck = Physics2D.Raycast(feet.position, Vector2.down, 0.1f);
+        RaycastHit2D groundCheck;
+        
+        if (playerData.isFacedUp)
+        {
+            feet.localPosition = new Vector3(0, 0.75f, 0);
+            groundCheck = Physics2D.Raycast(feet.position, Vector2.up, 0.1f);
+        }
+        
+        else
+        {
+            feet.localPosition = new Vector3(0, -0.75f, 0);
+            groundCheck = Physics2D.Raycast(feet.position, Vector2.down, 0.1f);
+        }
         
         if (groundCheck.collider != null)
         {
-            playerData.isGrounded = groundCheck.collider.CompareTag("Ground");
+            playerData.isGrounded = groundCheck.collider.CompareTag("Ground") || groundCheck.collider.CompareTag("MovingGround");
         }
         
         else
