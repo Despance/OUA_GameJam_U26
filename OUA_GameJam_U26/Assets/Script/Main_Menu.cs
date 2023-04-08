@@ -7,7 +7,7 @@ public class Main_Menu : MonoBehaviour
 {
     public void playGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Fatma");
     }
     public void mainMenu() 
     {
