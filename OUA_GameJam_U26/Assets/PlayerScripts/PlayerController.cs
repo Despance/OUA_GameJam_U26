@@ -11,15 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int extraJumpCountLimit;
     [SerializeField] private Transform feet;
     [SerializeField] private PlayerData playerData;
-    
+
     private float moveInput;
     private float speed;
     private float jumpSpeed;
     private float jumpBufferLimit = 0.2f;
     private float jumpBufferTimer;
-    private float coyoteTimeLimit = 0.2f;
+    private float coyoteTimeLimit = 0.3f;
     private float coyoteTimer;
-    public int extraJumpCounter;
+    private int extraJumpCounter;
     private Rigidbody2D rb;
     
     private void Start()
@@ -69,15 +69,15 @@ public class PlayerController : MonoBehaviour
         //ground check
         if (playerData.isFacedUp)
         {
-            feet.localPosition = new Vector3(0, 0.75f, 0);
+            feet.localPosition = new Vector3(0, 0.8f, 0);
         }
         
         else
         {
-            feet.localPosition = new Vector3(0, -0.75f, 0);
+            feet.localPosition = new Vector3(0, -0.8f, 0);
         }
-
-        playerData.isGrounded = Physics2D.OverlapBox(feet.position, feet.localScale, 0, 3); // Ground Layer = 3
+        
+        playerData.isGrounded = Physics2D.OverlapBox(feet.position, feet.localScale, 0);
         //ground check
 
         //jump buffer
@@ -125,8 +125,9 @@ public class PlayerController : MonoBehaviour
         //jump
         
         //extra jump
-        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && playerData.isJumping && extraJumpCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer <= 0 && playerData.canExtraJump && extraJumpCounter > 0)
         {
+            
             if (playerData.isFacedUp)
             {
                 rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed);
