@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
     private float moveInput;
     private float speed;
     private float jumpSpeed;
-    private float jumpBufferLimit = 0.1f;
+    private float jumpBufferLimit = 0.2f;
     private float jumpBufferTimer;
-    private float coyoteTimeLimit = 0.1f;
+    private float coyoteTimeLimit = 0.2f;
     private float coyoteTimer;
     private int extraJumpCounter;
     private Rigidbody2D rb;
