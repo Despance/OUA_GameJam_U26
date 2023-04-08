@@ -38,6 +38,14 @@ public class PlayerController : MonoBehaviour
         if (moveInput != 0)
         {
             playerData.isIdle = false;
+            playerData.isWalking = true;
+            playerData.isRunning = false;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                playerData.isWalking = false;
+                playerData.isRunning = true;
+            }
             
             if (moveInput == 1f)
             {
@@ -48,20 +56,9 @@ public class PlayerController : MonoBehaviour
             {
                 playerData.isFacedRight = false;
             }
-            
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                playerData.isRunning = true;
-            }
-
-            else
-            {
-                playerData.isRunning = false;
-                playerData.isWalking = true;
-            }
         }
 
-        else
+        else if (!playerData.isJumping)
         {
             playerData.isIdle = true;
             playerData.isWalking = false;
@@ -100,6 +97,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             playerData.isJumping = true; //jump state
+            playerData.isIdle = false;  //jump state
         }
         //jump
         
