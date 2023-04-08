@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeLimit = 0.1f;
     private float coyoteTimer;
     private int extraJumpCounter;
-    private RaycastHit2D groundCheck;
     private Rigidbody2D rb;
     
     private void Start()
@@ -79,7 +78,7 @@ public class PlayerController : MonoBehaviour
         //jump buffer
         
         //coyote time
-        if (isGrounded())
+        if (IsGrounded())
         {
             coyoteTimer = coyoteTimeLimit;
             extraJumpCounter = extraJumpCountLimit; //extra jump
@@ -111,7 +110,7 @@ public class PlayerController : MonoBehaviour
         //jump
         
         //extra jump
-        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !isGrounded() && extraJumpCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !IsGrounded() && extraJumpCounter > 0)
         {
             if (playerData.isFacedUp)
             {
@@ -141,8 +140,10 @@ public class PlayerController : MonoBehaviour
         //running
     }
     
-    private bool isGrounded()
+    private bool IsGrounded()
     {
+        RaycastHit2D groundCheck;
+        
         if (playerData.isFacedUp)
         {
             feet.localPosition = new Vector3(0, 0.75f, 0);
@@ -157,7 +158,7 @@ public class PlayerController : MonoBehaviour
         
         if (groundCheck.collider != null)
         {
-            playerData.isGrounded = groundCheck.collider.CompareTag("Ground");
+            playerData.isGrounded = groundCheck.collider.CompareTag("Ground") || groundCheck.collider.CompareTag("MovingGround");
         }
         
         else
