@@ -47,7 +47,7 @@ public class CoinManager : MonoBehaviour
             coin.transform.position = ToplanacakPos;
             coin.SetActive(true);
 
-            coin.transform.DOMove(HedefPos,1f).SetEase(Ease.OutBack).OnComplete(() =>
+            coin.transform.DOMove(HedefPos,.5f).SetEase(Ease.OutBack).OnComplete(() =>
                 {
                     coin.SetActive(false);
                     CoinKuyruk.Enqueue(coin);               

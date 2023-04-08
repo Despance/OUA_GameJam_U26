@@ -20,14 +20,20 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //gameObject.transform.Translate(new Vector3(deger * hiz * Time.deltaTime, 0, 0));
 
-        if (tag == "YuvEnemy")
+        
+        //gameObject.transform.Translate(new Vector3(deger * hiz * Time.deltaTime, 0, 0));
+        if (tag == "KarEnemy")
+        {
+            gameObject.transform.Translate(new Vector3(deger * hiz * Time.deltaTime, 0, 0));
+        }
+
+        else if  (tag == "YuvEnemy")
         {
             transform.Rotate(new Vector3(0, 0, Time.deltaTime * 150));
         }
         
-
+        
         
             
     }
@@ -40,11 +46,19 @@ public class EnemyManager : MonoBehaviour
             
         }
 
+       // if (other.gameObject.tag == "GitGel")
+       // {
+         //  deger *= -1;
+           //gameObject.transform.localScale = new Vector3(-1 * deger, 1, 1);
+        //}
+    }
+    public void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.gameObject.tag == "GitGel")
         {
             deger *= -1;
         }
+            
     }
-
 
 }
