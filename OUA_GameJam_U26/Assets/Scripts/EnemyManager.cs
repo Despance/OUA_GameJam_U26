@@ -31,16 +31,16 @@ public class EnemyManager : MonoBehaviour
         
             
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            Debug.Log(other.name);
-            other.GetComponent<NewBehaviourScript>().getDamage(damage);
+            Debug.Log(other.gameObject.name);
+            other.gameObject.GetComponent<NewBehaviourScript>().getDamage(damage);
             
         }
 
-        if (other.tag == "GitGel")
+        if (other.gameObject.tag == "GitGel")
         {
             deger *= -1;
         }

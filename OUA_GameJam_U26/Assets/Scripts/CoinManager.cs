@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class CoinManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class CoinManager : MonoBehaviour
     private void Start()
     {
         ToplamPuan = 0;
+        CoinleriOlustur();
     }
 
     void CoinleriOlustur()
@@ -36,4 +38,30 @@ public class CoinManager : MonoBehaviour
             CoinKuyruk.Enqueue(coin); 
         }
     }
+
+    void CoinlereHareketVer(Vector3 ToplanacakPos, int adet)
+    {
+        for (int i = 0; i < adet; i++)
+        {
+            GameObject coin = CoinKuyruk.Dequeue();
+            coin.transform.position = ToplanacakPos;
+            coin.SetActive(true);
+
+            coin.transform.DOMove(HedefPos,1f).SetEase(Ease.OutBack).OnComplete(() =>
+                {
+                    coin.SetActive(false);
+                    CoinKuyruk.Enqueue(coin);               
+                });
+        }
+
+    }
+
+    public void PuanArtir(int puan,Vector3 ToplanacakPos)
+    {
+        ToplamPuan += puan;
+        CoinText.text = ToplamPuan.ToString();
+        CoinlereHareketVer(ToplanacakPos, 7);
+    }
+
+
 }

@@ -12,6 +12,7 @@ TagManager:
   - MovingGround
   - MovingPlatformRight
   - MovingPlatformLeft
+  - Coin
   layers:
   - Default
   - TransparentFX
