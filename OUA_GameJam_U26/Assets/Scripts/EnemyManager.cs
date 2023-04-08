@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public float health;
     public float damage;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,8 @@ public class EnemyManager : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
             other.GetComponent<NewBehaviourScript>().getDamage(damage);
+            
 
         }
     }
