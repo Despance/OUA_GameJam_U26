@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerPowers : MonoBehaviour
@@ -31,12 +32,12 @@ public class PlayerPowers : MonoBehaviour
         //shrink
         if (Input.GetKeyDown(KeyCode.C) && isShrinked && playerData.canShrink)
         {
-            tf.localScale = new Vector3(1, 1, 1);
+            tf.DOScale(new Vector3(1, 1, 1), 1f);
             isShrinked = false;
         }
         else if (Input.GetKeyDown(KeyCode.C) && !isShrinked && playerData.canShrink)
         {
-            tf.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            tf.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1f);
             isShrinked = true;
         }
         //shrink

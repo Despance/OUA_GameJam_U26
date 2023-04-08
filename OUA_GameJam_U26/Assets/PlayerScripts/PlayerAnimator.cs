@@ -20,11 +20,11 @@ public class PlayerAnimator : MonoBehaviour
     private void Update()
     {
         //animations
-        if (rb.velocity.y > 0)
+        if (playerData.isJumping && rb.velocity.y > 0)
         {
             animator.Play("PlayerJumping"); //name problem
         }
-        else if (rb.velocity.y < 0)
+        else if (playerData.isJumping && rb.velocity.y < 0)
         {
             animator.Play("PlayerJumpingDown");
                 
