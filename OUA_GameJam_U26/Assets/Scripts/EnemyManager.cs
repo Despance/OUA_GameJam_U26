@@ -6,6 +6,9 @@ public class EnemyManager : MonoBehaviour
 {
     public float health;
     public float damage;
+    public float hiz, deger;
+    public Transform Git, Gel;
+    bool PlayerCollider = false;
     
 
     // Start is called before the first frame update
@@ -17,15 +20,29 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //gameObject.transform.Translate(new Vector3(deger * hiz * Time.deltaTime, 0, 0));
+
+        if (tag == "YuvEnemy")
+        {
+            transform.Rotate(new Vector3(0, 0, Time.deltaTime * 150));
+        }
         
+
+        
+            
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
+            Debug.Log(other.name);
             other.GetComponent<NewBehaviourScript>().getDamage(damage);
             
+        }
 
+        if (other.tag == "GitGel")
+        {
+            deger *= -1;
         }
     }
 

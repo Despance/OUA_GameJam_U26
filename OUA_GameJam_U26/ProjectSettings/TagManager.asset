@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - YuvEnemy
+  - KarEnemy
+  - GitGel
   layers:
   - Default
   - TransparentFX
