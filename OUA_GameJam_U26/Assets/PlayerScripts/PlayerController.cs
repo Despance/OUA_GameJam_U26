@@ -7,18 +7,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpSpeedDefault;
     [SerializeField] private float speedRunning;
     [SerializeField] private float jumpSpeedRunning;
+    [SerializeField] private int extraJumpCountLimit;
     [SerializeField] private Transform feet;
     [SerializeField] private PlayerData playerData;
 
+    private float moveInput;
     private float speed;
     private float jumpSpeed;
     private float jumpBufferLimit = 0.1f;
     private float jumpBufferTimer;
     private float coyoteTimeLimit = 0.1f;
     private float coyoteTimer;
+    private int extraJumpCounter;
     private RaycastHit2D groundCheck;
     private Rigidbody2D rb;
-    private float moveInput;
     
     private void Start()
     {
@@ -31,6 +33,41 @@ public class PlayerController : MonoBehaviour
         moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
         //horizontal movement
+
+        //state calculation
+        if (moveInput != 0)
+        {
+            playerData.isIdle = false;
+            
+            if (moveInput == 1f)
+            {
+                playerData.isFacedRight = true; 
+            }
+
+            else
+            {
+                playerData.isFacedRight = false;
+            }
+            
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                playerData.isRunning = true;
+            }
+
+            else
+            {
+                playerData.isRunning = false;
+                playerData.isWalking = true;
+            }
+        }
+
+        else
+        {
+            playerData.isIdle = true;
+            playerData.isWalking = false;
+            playerData.isRunning = false;
+        }
+        //state calculation
 
         //jump buffer
         if (Input.GetKeyDown(KeyCode.Space))
@@ -48,6 +85,8 @@ public class PlayerController : MonoBehaviour
         if (isGrounded())
         {
             coyoteTimer = coyoteTimeLimit;
+            extraJumpCounter = extraJumpCountLimit; //extra jump
+            playerData.isJumping = false; //jump state
         }
         
         else
@@ -60,9 +99,18 @@ public class PlayerController : MonoBehaviour
         if (coyoteTimer > 0f && jumpBufferTimer > 0f && playerData.canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            playerData.isJumping = true; //jump state
         }
         //jump
         
+        //extra jump
+        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !isGrounded() && extraJumpCounter > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * 1.25f);
+            extraJumpCounter--;
+        }
+        //extra jump
+
         //running
         if (Input.GetKey(KeyCode.LeftShift) && playerData.canRun)
         {

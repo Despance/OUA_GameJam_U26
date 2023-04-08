@@ -557,6 +557,7 @@ MonoBehaviour:
   jumpSpeedDefault: 12
   speedRunning: 16
   jumpSpeedRunning: 16
+  extraJumpCountLimit: 1
   feet: {fileID: 1287324379}
   playerData: {fileID: 1182794903}
 --- !u!114 &1182794903
@@ -573,6 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canJump: 0
   canRun: 0
+  canDoubleJump: 0
   isGrounded: 0
   isJumping: 0
   isRunning: 0
