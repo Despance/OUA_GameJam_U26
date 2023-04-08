@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int extraJumpCountLimit;
     [SerializeField] private Transform feet;
     [SerializeField] private PlayerData playerData;
-
+    
     private float moveInput;
     private float speed;
     private float jumpSpeed;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private float jumpBufferTimer;
     private float coyoteTimeLimit = 0.2f;
     private float coyoteTimer;
-    private int extraJumpCounter;
+    public int extraJumpCounter;
     private Rigidbody2D rb;
     
     private void Start()
@@ -65,6 +66,20 @@ public class PlayerController : MonoBehaviour
         }
         //state calculation
 
+        //ground check
+        if (playerData.isFacedUp)
+        {
+            feet.localPosition = new Vector3(0, 0.75f, 0);
+        }
+        
+        else
+        {
+            feet.localPosition = new Vector3(0, -0.75f, 0);
+        }
+
+        playerData.isGrounded = Physics2D.OverlapBox(feet.position, feet.localScale, 0, 3); // Ground Layer = 3
+        //ground check
+
         //jump buffer
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -78,7 +93,7 @@ public class PlayerController : MonoBehaviour
         //jump buffer
         
         //coyote time
-        if (IsGrounded())
+        if (playerData.isGrounded)
         {
             coyoteTimer = coyoteTimeLimit;
             extraJumpCounter = extraJumpCountLimit; //extra jump
@@ -90,7 +105,7 @@ public class PlayerController : MonoBehaviour
             coyoteTimer -= Time.deltaTime;
         }
         //coyote time
-
+        
         //jump
         if (coyoteTimer > 0f && jumpBufferTimer > 0f && playerData.canJump)
         {
@@ -110,7 +125,7 @@ public class PlayerController : MonoBehaviour
         //jump
         
         //extra jump
-        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !IsGrounded() && extraJumpCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && playerData.isJumping && extraJumpCounter > 0)
         {
             if (playerData.isFacedUp)
             {
@@ -139,33 +154,9 @@ public class PlayerController : MonoBehaviour
         }
         //running
     }
-    
-    private bool IsGrounded()
-    {
-        RaycastHit2D groundCheck;
-        
-        if (playerData.isFacedUp)
-        {
-            feet.localPosition = new Vector3(0, 0.75f, 0);
-            groundCheck = Physics2D.Raycast(feet.position, Vector2.up, 0.1f);
-        }
-        
-        else
-        {
-            feet.localPosition = new Vector3(0, -0.75f, 0);
-            groundCheck = Physics2D.Raycast(feet.position, Vector2.down, 0.1f);
-        }
-        
-        if (groundCheck.collider != null)
-        {
-            playerData.isGrounded = groundCheck.collider.CompareTag("Ground") || groundCheck.collider.CompareTag("MovingGround");
-        }
-        
-        else
-        {
-            playerData.isGrounded = false;
-        }
 
-        return playerData.isGrounded;
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(feet.position, feet.localScale);
     }
 }

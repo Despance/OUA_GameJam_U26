@@ -17,7 +17,7 @@ public class PlayerData : MonoBehaviour
     public bool isIdle;    //player controller
     
     [Header("Non Animated States")]
-    public bool isMovingGrounded; //player power
+    public bool isMovingGrounded; //player powers
     public bool isGrounded; //player controller
     public bool isJumping; //player controller
 }
