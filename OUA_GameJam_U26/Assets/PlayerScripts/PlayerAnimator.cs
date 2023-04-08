@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [Header("Assign")]
-    
     private Rigidbody2D rb;
     private Animator animator;
     private PlayerData playerData;

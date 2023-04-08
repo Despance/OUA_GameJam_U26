@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float jumpSpeed;
     private float jumpBufferLimit = 0.2f;
     private float jumpBufferTimer;
-    private float coyoteTimeLimit = 0.2f;
+    private float coyoteTimeLimit = 0.3f;
     private float coyoteTimer;
     private int extraJumpCounter;
     private Rigidbody2D rb;
@@ -65,6 +66,20 @@ public class PlayerController : MonoBehaviour
         }
         //state calculation
 
+        //ground check
+        if (playerData.isFacedUp)
+        {
+            feet.localPosition = new Vector3(0, 0.8f, 0);
+        }
+        
+        else
+        {
+            feet.localPosition = new Vector3(0, -0.8f, 0);
+        }
+        
+        playerData.isGrounded = Physics2D.OverlapBox(feet.position, feet.localScale, 0);
+        //ground check
+
         //jump buffer
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -78,7 +93,7 @@ public class PlayerController : MonoBehaviour
         //jump buffer
         
         //coyote time
-        if (IsGrounded())
+        if (playerData.isGrounded)
         {
             coyoteTimer = coyoteTimeLimit;
             extraJumpCounter = extraJumpCountLimit; //extra jump
@@ -90,7 +105,7 @@ public class PlayerController : MonoBehaviour
             coyoteTimer -= Time.deltaTime;
         }
         //coyote time
-
+        
         //jump
         if (coyoteTimer > 0f && jumpBufferTimer > 0f && playerData.canJump)
         {
@@ -110,8 +125,9 @@ public class PlayerController : MonoBehaviour
         //jump
         
         //extra jump
-        if (Input.GetKeyDown(KeyCode.Space) && playerData.canExtraJump && !IsGrounded() && extraJumpCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer <= 0 && playerData.canExtraJump && extraJumpCounter > 0)
         {
+            
             if (playerData.isFacedUp)
             {
                 rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed);
@@ -139,33 +155,9 @@ public class PlayerController : MonoBehaviour
         }
         //running
     }
-    
-    private bool IsGrounded()
-    {
-        RaycastHit2D groundCheck;
-        
-        if (playerData.isFacedUp)
-        {
-            feet.localPosition = new Vector3(0, 0.75f, 0);
-            groundCheck = Physics2D.Raycast(feet.position, Vector2.up, 0.1f);
-        }
-        
-        else
-        {
-            feet.localPosition = new Vector3(0, -0.75f, 0);
-            groundCheck = Physics2D.Raycast(feet.position, Vector2.down, 0.1f);
-        }
-        
-        if (groundCheck.collider != null)
-        {
-            playerData.isGrounded = groundCheck.collider.CompareTag("Ground") || groundCheck.collider.CompareTag("MovingGround");
-        }
-        
-        else
-        {
-            playerData.isGrounded = false;
-        }
 
-        return playerData.isGrounded;
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(feet.position, feet.localScale);
     }
 }
