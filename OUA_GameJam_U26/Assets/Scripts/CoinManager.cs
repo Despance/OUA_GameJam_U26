@@ -10,7 +10,6 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private GameObject CoinPrefab;
     [SerializeField] private TextMeshProUGUI CoinText;
     public AudioSource audiSource;
-    public AudioClip[] voices;
 
 
     private int ToplamPuan;
@@ -61,7 +60,7 @@ public class CoinManager : MonoBehaviour
     public void PuanArtir(int puan,Vector3 ToplanacakPos)
     {
         ToplamPuan += puan;
-        audiSource.PlayOneShot(voices[0]);
+        audiSource.Play();
         CoinText.text = ToplamPuan.ToString();
         CoinlereHareketVer(ToplanacakPos, 7);
     }
