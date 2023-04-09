@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     [Header("Abilities")]
-    public static bool canJump;
-    public static bool canRun;
-    public static bool canExtraJump;
-    public static bool canReverseGravity;
-    public static bool canShrink;
-    public static bool canMovePlatforms;
+    public static bool canJump = true;
+    public static bool canRun = true;
+    public static bool canExtraJump = true;
+    public static bool canReverseGravity = true;
+    public static bool canShrink = true;
+    public static bool canMovePlatforms = true;
 
     [Header("Animation States")]
     public static bool isFacedRight; //player controller
