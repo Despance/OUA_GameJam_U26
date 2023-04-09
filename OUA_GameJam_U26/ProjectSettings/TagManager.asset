@@ -5,9 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - YuvEnemy
+  - KarEnemy
+  - GitGel
   - MovingGround
   - MovingPlatformRight
   - MovingPlatformLeft
+  - Coin
   layers:
   - Default
   - TransparentFX
