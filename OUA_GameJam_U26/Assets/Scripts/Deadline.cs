@@ -45,7 +45,7 @@ public class Deadline : MonoBehaviour
         _sliderText = _slider.GetComponentInChildren<TextMeshProUGUI>();
         _sprite.enabled = false;
         
-        _slider.value = 20;
+        _slider.value = 0;
         xSpeed = (finishTransform.position.x - transform.position.x) / 7;
         
         StartCoroutine(updateTime());
@@ -60,17 +60,22 @@ public class Deadline : MonoBehaviour
                 _sliderText.text = (30 - _slider.value) + " days left to deadline";
             });
 
-        if (_slider.value < 30)
+        if (_slider.value < 30 && !DialogueManager.gameFinished)
         {
-            if (_slider.value>=23 && !DialogueManager.gameFinished)
+            if (_slider.value>=23)
             {
                 deadLineMove();
+                
             }
             StartCoroutine(updateTime());
         }
         else
         {
-            SceneManager.LoadScene("Finish");
+            if (!DialogueManager.gameFinished)
+            {
+                SceneManager.LoadScene("Finish");
+            }
+            
         }
     }
     

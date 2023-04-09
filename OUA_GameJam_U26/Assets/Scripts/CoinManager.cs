@@ -12,7 +12,7 @@ public class CoinManager : MonoBehaviour
     public AudioSource audiSource;
 
 
-    private int ToplamPuan;
+    public int ToplamPuan;
 
     private Queue<GameObject> CoinKuyruk = new Queue<GameObject>();
 

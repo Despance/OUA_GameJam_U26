@@ -16,8 +16,10 @@ public class DialogueManager : MonoBehaviour
     public float textSpeed = 15f;
     private TextMeshProUGUI textBox;
     static int dialogueIndex = 0;
-    public static bool gameFinished = false; 
+    public static bool gameFinished = false;
 
+    [SerializeField]
+    private Sprite[] _fairySprites;
    
     void Start()
     {
@@ -34,7 +36,11 @@ public class DialogueManager : MonoBehaviour
 
     public void showDialogue()
     {
-        dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
+        if (PlayerData.isShrinked)
+            dialogueObject.DOLocalMove(new Vector3(0, 2.6f, 0), 0.1f);
+        else
+            dialogueObject.DOLocalMove(new Vector3(0, 2f, 0), 0.1f);
+        dialogueObject.DOScale(PlayerData.isShrinked ?Vector3.one*2:Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
         showText();
     }
 
@@ -67,10 +73,23 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    public void winDialogue()
+    public void openChest()
+    {
+        if (!gameFinished)
+        {
+            dialogueObject.DOScale(Vector3.zero, 0.01f);
+        gameFinished = true;
+        Transform winObject = GameObject.FindWithTag("Chest").transform.GetChild(1);
+        dialogueObject = winObject.GetChild(1).GetChild(0);
+        textBox = winObject.GetComponentInChildren<TextMeshProUGUI>();
+        winObject.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            _fairySprites[Random.Range(0, _fairySprites.Length)];
+        winObject.GetChild(0).DOLocalMove(new Vector3(0, 2.5f, 0), 0.5f).OnComplete(winDialogue);
+        }
+    }
+    private void winDialogue()
     {
         gameFinished = true;
-        DOTween.KillAll();
         dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
         int levelIndex = SceneManager.GetActiveScene().buildIndex-1;
         dialogueStarted = true;
@@ -111,10 +130,10 @@ public class DialogueManager : MonoBehaviour
 
     private string[] winStrings =
     {
-        "Kötü kalpli dinozorun testini geçtin. Öğrendiklerini kullanarak yeni bir güç edindin: Artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. Öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
+        "Tebrikler ilk bölümü bitirdin. Öğrendiklerini kullanarak yeni bir güç edindin: Artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. Öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
         "Tüm bu akademi maceranda yeni bir gücün var. Artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. Öğrendiğin kodları yaz ve \"R\" tuşu ile büyüyüp küçül.",
         "Seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. Öğrendiklerini kullanarak yeni bir güç daha edindin: Artık bir oyunda nasıl koşulur onu biliyorsun. Koşarken daha uzun mesafelere zıplayabilirsin.",
-        "Kötü kalpli dinozorun vakti dolmak üzere. Eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. Öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla.",
+        "Tebrikler akademiyi başarıyla tamamladın. Sertifikanı bir sonraki bölümde alabilirsin. Akademinin bir parçası olduğun için teşekkürler.",
         
     };
 
