@@ -21,4 +21,5 @@ public class PlayerData : MonoBehaviour
     public bool isMovingGrounded; //player powers
     public bool isGrounded; //player controller
     public bool isJumping; //player controller
+    public bool isShrinked; //player powers
 }

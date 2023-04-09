@@ -6,10 +6,6 @@ public class PlayerPowers : MonoBehaviour
     [Header("Assign")]
     [SerializeField] private Transform feet;
 
-    [Header("Status")]
-    [SerializeField] private bool isReverse;
-    [SerializeField] private bool isShrinked;
-
     [Header("MovingPlatform")] 
     public Rigidbody2D selectedPlatform;
 
@@ -31,21 +27,20 @@ public class PlayerPowers : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C) && playerData.canReverseGravity)
         {
             rb.gravityScale = -1 * rb.gravityScale;
-            isReverse = !isReverse;
             playerData.isFacedUp = !playerData.isFacedUp;
         }
         //reverse gravity
 
         //shrink
-        if (Input.GetKeyDown(KeyCode.R) && isShrinked && playerData.canShrink)
+        if (Input.GetKeyDown(KeyCode.R) && playerData.isShrinked && playerData.canShrink)
         {
             tf.DOScale(new Vector3(1, 1, 1), 1f);
-            isShrinked = false;
+            playerData.isShrinked = false;
         }
-        else if (Input.GetKeyDown(KeyCode.R) && !isShrinked && playerData.canShrink)
+        else if (Input.GetKeyDown(KeyCode.R) && !playerData.isShrinked && playerData.canShrink)
         {
             tf.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1f);
-            isShrinked = true;
+            playerData.isShrinked = true;
         }
         //shrink
         

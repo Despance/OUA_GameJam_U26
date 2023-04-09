@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,14 +5,16 @@ public class PlayerController : MonoBehaviour
     [Header("Assign")]
     [SerializeField] private float speedDefault;
     [SerializeField] private float jumpSpeedDefault;
-    [SerializeField] private float speedRunning;
-    [SerializeField] private float jumpSpeedRunning;
+    [SerializeField] private float speedModifierDefault = 1f;
+    [SerializeField] private float runningSpeed;
+    [SerializeField] private float runningJumpSpeed;
     [SerializeField] private int extraJumpCountLimit;
     [SerializeField] private Transform feet;
     [SerializeField] private PlayerData playerData;
-
+    
     private float moveInput;
     private float speed;
+    private float speedModifier;
     private float jumpSpeed;
     private float jumpBufferLimit = 0.2f;
     private float jumpBufferTimer;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         //horizontal movement
         moveInput = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        rb.velocity = new Vector2(moveInput * speed * speedModifier, rb.velocity.y);
         //horizontal movement
 
         //state calculation
@@ -65,6 +66,18 @@ public class PlayerController : MonoBehaviour
             playerData.isRunning = false;
         }
         //state calculation
+        
+        //jump speed modifier
+        if (playerData.isShrinked)
+        {
+            speedModifier = speedModifierDefault * 0.5f;
+        }
+        
+        else
+        {
+            speedModifier = speedModifierDefault;
+        }
+        //jump speed modifier
 
         //ground check
         if (playerData.isFacedUp)
@@ -111,12 +124,12 @@ public class PlayerController : MonoBehaviour
         {
             if (playerData.isFacedUp)
             {
-                rb.velocity = new Vector2(rb.velocity.x, -1 * jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, -1 * jumpSpeed * speedModifier);
             }
             
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * speedModifier);
             }
             
             playerData.isJumping = true; //jump state
@@ -130,12 +143,12 @@ public class PlayerController : MonoBehaviour
             
             if (playerData.isFacedUp)
             {
-                rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed * speedModifier);
             }
             
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * speedModifier);
             }
             extraJumpCounter--;
         }
@@ -144,8 +157,8 @@ public class PlayerController : MonoBehaviour
         //running
         if (Input.GetKey(KeyCode.LeftShift) && playerData.canRun)
         {
-            speed = speedRunning;
-            jumpSpeed = jumpSpeedRunning;
+            speed = runningSpeed;
+            jumpSpeed = runningJumpSpeed;
         }
         
         else
