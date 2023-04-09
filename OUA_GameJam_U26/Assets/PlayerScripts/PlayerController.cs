@@ -161,8 +161,6 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * jumpSpeedModifier);
             }
-            
-            PlayerData.extraJumpSound = true; //sound state
             extraJumpCounter--;
             
         }

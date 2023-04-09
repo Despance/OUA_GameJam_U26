@@ -7,9 +7,9 @@ public class PlayerData : MonoBehaviour
     public static bool canJump = true;
     public static bool canRun = true;
     public static bool canExtraJump = false;
-    public static bool canReverseGravity = false;
-    public static bool canShrink = false;
-    public static bool canMovePlatforms = false;
+    public static bool canReverseGravity = true;
+    public static bool canShrink = true;
+    public static bool canMovePlatforms = true;
 
     [Header("Animation States")]
     public static bool isFacedRight; //player controller
@@ -20,7 +20,6 @@ public class PlayerData : MonoBehaviour
 
     [Header("Sound States")]
     public static bool jumpSound;
-    public static bool extraJumpSound;
     
     [Header("Non Animated States")]
     public static bool isMovingGrounded; //player powers
