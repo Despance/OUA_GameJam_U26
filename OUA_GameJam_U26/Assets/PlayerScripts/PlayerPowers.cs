@@ -28,7 +28,7 @@ public class PlayerPowers : MonoBehaviour
     void Update()
     {
         //reverse gravity
-        if (Input.GetKeyDown(KeyCode.R) && playerData.canReverseGravity)
+        if (Input.GetKeyDown(KeyCode.C) && playerData.canReverseGravity)
         {
             rb.gravityScale = -1 * rb.gravityScale;
             isReverse = !isReverse;
@@ -37,12 +37,12 @@ public class PlayerPowers : MonoBehaviour
         //reverse gravity
 
         //shrink
-        if (Input.GetKeyDown(KeyCode.C) && isShrinked && playerData.canShrink)
+        if (Input.GetKeyDown(KeyCode.R) && isShrinked && playerData.canShrink)
         {
             tf.DOScale(new Vector3(1, 1, 1), 1f);
             isShrinked = false;
         }
-        else if (Input.GetKeyDown(KeyCode.C) && !isShrinked && playerData.canShrink)
+        else if (Input.GetKeyDown(KeyCode.R) && !isShrinked && playerData.canShrink)
         {
             tf.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1f);
             isShrinked = true;
