@@ -29,6 +29,7 @@ public class PlayerCheckpoint : MonoBehaviour
         if (bengiCoinDamage.dead)
         {
             transform.position = startingPoint;
+            checkpoint = startingPoint;
             Revive();
         }
     }
