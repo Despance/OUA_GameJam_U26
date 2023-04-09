@@ -5,48 +5,46 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Assign")]
     private Rigidbody2D rb;
     private Animator animator;
-    private PlayerData playerData;
     private SpriteRenderer spriteRenderer;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerData = GetComponent<PlayerData>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         //animations
-        if (playerData.isJumping && rb.velocity.y > 0)
+        if (PlayerData.isJumping && rb.velocity.y > 0)
         {
             animator.Play("PlayerJumping"); //name problem
         }
-        else if (playerData.isJumping && rb.velocity.y < 0)
+        else if (PlayerData.isJumping && rb.velocity.y < 0)
         {
             animator.Play("PlayerJumpingDown");
                 
         }
-        else if (playerData.isIdle)
+        else if (PlayerData.isIdle)
         {
             animator.Play("PlayerIdle");
         }
 
-        else if (playerData.isWalking)
+        else if (PlayerData.isWalking)
         {
             animator.Play("PlayerWalking");
         }
         
-        else if (playerData.isRunning)
+        else if (PlayerData.isRunning)
         {
             animator.Play("PlayerRunning");   
         }
         //animations
         
         //looking directions
-        spriteRenderer.flipX = !playerData.isFacedRight;
-        spriteRenderer.flipY = playerData.isFacedUp;
+        spriteRenderer.flipX = !PlayerData.isFacedRight;
+        spriteRenderer.flipY = PlayerData.isFacedUp;
         //looking directions
     }
 }

@@ -6,25 +6,18 @@ public class PlayerSoundController : MonoBehaviour
     [SerializeField] private AudioSource jumpSource;
     [SerializeField] private AudioSource extraJumpSource;
 
-    private PlayerData playerData;
-    
-    void Start()
-    {
-        playerData = GetComponent<PlayerData>();
-    }
-
     void LateUpdate()
     {
-        if (playerData.jumpSound)
+        if (PlayerData.jumpSound)
         {
             jumpSource.Play();
-            playerData.jumpSound = false;
+            PlayerData.jumpSound = false;
         }
 
-        if (playerData.extraJumpSound)
+        if (PlayerData.extraJumpSound)
         {
             extraJumpSource.Play();
-            playerData.extraJumpSound = false;
+            PlayerData.extraJumpSound = false;
         }
     }
 }
