@@ -36,7 +36,11 @@ public class DialogueManager : MonoBehaviour
 
     public void showDialogue()
     {
-        dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
+        if (PlayerData.isShrinked)
+            dialogueObject.DOLocalMove(new Vector3(0, 2.6f, 0), 0.1f);
+        else
+            dialogueObject.DOLocalMove(new Vector3(0, 2f, 0), 0.1f);
+        dialogueObject.DOScale(PlayerData.isShrinked ?Vector3.one*2:Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
         showText();
     }
 
@@ -71,7 +75,9 @@ public class DialogueManager : MonoBehaviour
 
     public void openChest()
     {
+        
         DOTween.KillAll();
+        hideDialogue();
         gameFinished = true;
         Transform winObject = GameObject.FindWithTag("Chest").transform.GetChild(1);
         dialogueObject = winObject.GetChild(1).GetChild(0);
@@ -82,6 +88,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void winDialogue()
     {
+        gameFinished = true;
         dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
         int levelIndex = SceneManager.GetActiveScene().buildIndex-1;
         dialogueStarted = true;
@@ -122,7 +129,7 @@ public class DialogueManager : MonoBehaviour
 
     private string[] winStrings =
     {
-        "Kötü kalpli dinozorun testini geçtin. Öğrendiklerini kullanarak yeni bir güç edindin: Artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. Öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
+        "Tebrikler ilk bölümü bitirdin. Öğrendiklerini kullanarak yeni bir güç edindin: Artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. Öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
         "Tüm bu akademi maceranda yeni bir gücün var. Artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. Öğrendiğin kodları yaz ve \"R\" tuşu ile büyüyüp küçül.",
         "Seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. Öğrendiklerini kullanarak yeni bir güç daha edindin: Artık bir oyunda nasıl koşulur onu biliyorsun. Koşarken daha uzun mesafelere zıplayabilirsin.",
         "Kötü kalpli dinozorun vakti dolmak üzere. Eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. Öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla.",
