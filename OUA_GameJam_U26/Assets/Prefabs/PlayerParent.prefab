@@ -420,6 +420,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6520763178236678964, guid: 54997990518e59f4d9b0a4a84532f59f, type: 3}
+      propertyPath: runningSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520763178236678964, guid: 54997990518e59f4d9b0a4a84532f59f, type: 3}
+      propertyPath: runningJumpSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8616021476730258083, guid: 54997990518e59f4d9b0a4a84532f59f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -560,20 +568,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &583453736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485773862693287402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8aa161631822b4290180f2bc41cf4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpSource: {fileID: 1438962333}
-  extraJumpSource: {fileID: 583453737}
 --- !u!82 &1438962333
 AudioSource:
   m_ObjectHideFlags: 0
@@ -670,6 +664,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &583453736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485773862693287402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8aa161631822b4290180f2bc41cf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSource: {fileID: 1438962333}
+  extraJumpSource: {fileID: 583453737}
 --- !u!114 &5683790099746855039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1880178342, guid: 54997990518e59f4d9b0a4a84532f59f, type: 3}
