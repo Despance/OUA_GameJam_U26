@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speedDefault;
     [SerializeField] private float jumpSpeedDefault;
     [SerializeField] private float speedModifierDefault = 1f;
+    [SerializeField] private float jumpSpeedModifierDefault = 1f;
     [SerializeField] private float runningSpeed;
     [SerializeField] private float runningJumpSpeed;
     [SerializeField] private int extraJumpCountLimit;
@@ -13,7 +14,8 @@ public class PlayerController : MonoBehaviour
     
     private float moveInput;
     private float speed;
-    public float speedModifier;
+    private float speedModifier;
+    private float jumpSpeedModifier;
     private float jumpSpeed;
     private float jumpBufferLimit = 0.2f;
     private float jumpBufferTimer;
@@ -70,11 +72,13 @@ public class PlayerController : MonoBehaviour
         if (PlayerData.isShrinked)
         {
             speedModifier = speedModifierDefault * 0.5f;
+            jumpSpeedModifier = jumpSpeedModifierDefault * 0.25f;
         }
         
         else
         {
             speedModifier = speedModifierDefault;
+            jumpSpeedModifier = jumpSpeedModifierDefault;
         }
         //jump speed modifier
 
@@ -123,12 +127,12 @@ public class PlayerController : MonoBehaviour
         {
             if (PlayerData.isFacedUp)
             {
-                rb.velocity = new Vector2(rb.velocity.x, -1 * jumpSpeed * speedModifier);
+                rb.velocity = new Vector2(rb.velocity.x, -1 * jumpSpeed * jumpSpeedModifier);
             }
             
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * speedModifier);
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * jumpSpeedModifier);
             }
 
             PlayerData.jumpSound = true; //sound state
@@ -143,12 +147,12 @@ public class PlayerController : MonoBehaviour
             
             if (PlayerData.isFacedUp)
             {
-                rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed * speedModifier);
+                rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed * jumpSpeedModifier);
             }
             
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * speedModifier);
+                rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * jumpSpeedModifier);
             }
 
             PlayerData.extraJumpSound = true; //sound state
