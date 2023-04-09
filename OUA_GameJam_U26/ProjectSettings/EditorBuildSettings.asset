@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level2.unity
     guid: 17f67b3b280b9344f9aeb73ea98bcc93
   - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 1a16ee56b8be82548b64c244deba7172
+  - enabled: 1
+    path: Assets/Scenes/ozgurLevel1.unity
+    guid: 2680ed8c8998ff441b2a41029bd44d50
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: fa1d2dcea60adc9439d8a3e7b80f8a35
   m_configObjects: {}

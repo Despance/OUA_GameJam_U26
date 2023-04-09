@@ -23,10 +23,11 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimer;
     private int extraJumpCounter;
     private Rigidbody2D rb;
-    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     private void Update()
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpBufferTimer = jumpBufferLimit;
+            PlayerData.jumpSound = true; //sound state
         }
 
         else
@@ -135,9 +137,14 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * jumpSpeedModifier);
             }
 
-            PlayerData.jumpSound = true; //sound state
+            
+             
             PlayerData.isJumping = true; //jump state
             PlayerData.isIdle = false;  //jump state
+            
+            
+            
+            
         }
         //jump
         
@@ -154,9 +161,10 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * jumpSpeedModifier);
             }
-
+            
             PlayerData.extraJumpSound = true; //sound state
             extraJumpCounter--;
+            
         }
         //extra jump
 
