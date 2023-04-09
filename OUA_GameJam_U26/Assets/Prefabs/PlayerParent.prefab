@@ -136,7 +136,7 @@ RectTransform:
   m_GameObject: {fileID: 8730214896287112187}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8730214896784393983}
@@ -1124,11 +1124,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7603154060903980588, guid: 638956fd32ddc994fa9a207e0a58605d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.12999725
+      value: -40.4
       objectReference: {fileID: 0}
     - target: {fileID: 7603154060903980588, guid: 638956fd32ddc994fa9a207e0a58605d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9099997
+      value: -2.0699997
       objectReference: {fileID: 0}
     - target: {fileID: 7603154060903980588, guid: 638956fd32ddc994fa9a207e0a58605d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1168,11 +1168,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7603154061754760284, guid: 638956fd32ddc994fa9a207e0a58605d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40.53
       objectReference: {fileID: 0}
     - target: {fileID: 7603154061754760284, guid: 638956fd32ddc994fa9a207e0a58605d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: 7603154061754760284, guid: 638956fd32ddc994fa9a207e0a58605d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1607,7 +1607,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueStarted: 0
   dialogueObject: {fileID: 8730214896287112186}
-  dialogueText: 
   textSpeed: 15
 --- !u!114 &5683790099746855039 stripped
 MonoBehaviour:

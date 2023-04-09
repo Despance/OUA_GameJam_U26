@@ -44,8 +44,7 @@ public class DialogueManager : MonoBehaviour
             DOTween.To(() => text, x => text = x, dialogueText, dialogueText.Length / textSpeed).SetEase(Ease.Linear)
                 .OnUpdate(() => { textBox.text = text; });
         }
-        
-        
+
     }
 
     public void hideDialogue()
@@ -58,21 +57,43 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    public void winDialogue(int levelIndex)
+    public void winDialogue()
     {
+        int levelIndex = SceneManager.GetActiveScene().buildIndex;
         dialogueStarted = true;
         string text = "";
         DOTween.To(() => text, x => text = x, winStrings[levelIndex], winStrings[levelIndex].Length / textSpeed).SetEase(Ease.Linear)
-            .OnUpdate(() => { textBox.text = text; }).OnComplete(()=>{});
-        SceneManager.LoadScene(levelIndex);
+            .OnUpdate(() => { textBox.text = text; }).OnComplete(() =>
+            {
+                switch (levelIndex)
+                {
+                    case 1:
+                        PlayerPowerGiver.GiveRun();
+                        break;
+                    case 2: 
+                        PlayerPowerGiver.GiveExtraJump();
+                        break;
+                    case 3:
+                        PlayerPowerGiver.GiveReverseGravity();
+                        break;
+                    case 4:
+                        PlayerPowerGiver.GiveShrink();
+                        break;
+                }
+                
+            });
+        
+        
+        SceneManager.LoadScene(levelIndex+1);
     }
 
+    
     private string[] winStrings =
     {
-        "kötü kalpli dinozorun testini geçtin. öğrendiklerini kullanarak yeni bir güç edindin: artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
         "bölüm sonu akademi: seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. öğrendiklerini kullanarak yeni bir güç daha edindin: artık bir oyunda nasıl koşulur onu biliyorsun. koşarken daha uzun mesafelere zıplayabilirsin.",
-        "tüm bu akademi maceranda yeni bir gücün var. artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. öğrendiğin kodları yaz ve R tuşu ile büyüyüp küçül.",
-        "kötü kalpli dinozorun vakti dolmak üzere. eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla."
+        "kötü kalpli dinozorun vakti dolmak üzere. eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla.",
+            "kötü kalpli dinozorun testini geçtin. öğrendiklerini kullanarak yeni bir güç edindin: artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
+        "tüm bu akademi maceranda yeni bir gücün var. artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. öğrendiğin kodları yaz ve R tuşu ile büyüyüp küçül."
     };
 
 
