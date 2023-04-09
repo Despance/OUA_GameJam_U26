@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -11,8 +10,8 @@ public class MovingPlatform : MonoBehaviour
     [Header("Status")]
     [SerializeField] private bool canMoveRight;
     [SerializeField] private bool canMoveLeft;
-
-    public int moveDirection;
+    [SerializeField] private int moveDirection;
+    
     private Rigidbody2D rb;
     private Transform tf;
     

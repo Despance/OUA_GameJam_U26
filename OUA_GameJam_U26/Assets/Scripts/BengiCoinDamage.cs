@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class BengiCoinDamage : MonoBehaviour
 {
     public static float health = 3;
     public bool dead = false;

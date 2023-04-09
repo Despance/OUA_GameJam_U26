@@ -6,7 +6,7 @@ public class LivesControl : MonoBehaviour
 {
     public void kirazyokolma()
     {
-        switch (NewBehaviourScript.health)
+        switch (BengiCoinDamage.health)
         {
             case 3:
                 gameObject.transform.GetChild(2).gameObject.SetActive(false);

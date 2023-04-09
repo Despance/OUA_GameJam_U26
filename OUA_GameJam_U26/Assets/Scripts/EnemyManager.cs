@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log(other.gameObject.name);
-            other.gameObject.GetComponent<NewBehaviourScript>().getDamage(damage);
+            other.gameObject.GetComponent<BengiCoinDamage>().getDamage(damage);
             
         }
 
