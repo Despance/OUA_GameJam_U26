@@ -3,27 +3,27 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     [Header("Abilities")]
-    public bool canJump;
-    public bool canRun;
-    public bool canExtraJump;
-    public bool canReverseGravity;
-    public bool canShrink;
-    public bool canMovePlatforms;
+    public static bool canJump;
+    public static bool canRun;
+    public static bool canExtraJump;
+    public static bool canReverseGravity;
+    public static bool canShrink;
+    public static bool canMovePlatforms;
 
     [Header("Animation States")]
-    public bool isFacedRight; //player controller
-    public bool isFacedUp; //player powers
-    public bool isRunning; //player controller
-    public bool isWalking; //player controller
-    public bool isIdle;    //player controller
+    public static bool isFacedRight; //player controller
+    public static bool isFacedUp; //player powers
+    public static bool isRunning; //player controller
+    public static bool isWalking; //player controller
+    public static bool isIdle;    //player controller
 
     [Header("Sound States")]
-    public bool jumpSound;
-    public bool extraJumpSound;
+    public static bool jumpSound;
+    public static bool extraJumpSound;
     
     [Header("Non Animated States")]
-    public bool isMovingGrounded; //player powers
-    public bool isGrounded; //player controller
-    public bool isJumping; //player controller
-    public bool isShrinked; //player powers
+    public static bool isMovingGrounded; //player powers
+    public static bool isGrounded; //player controller
+    public static bool isJumping; //player controller
+    public static bool isShrinked; //player powers
 }

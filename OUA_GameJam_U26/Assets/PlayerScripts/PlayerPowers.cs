@@ -10,13 +10,11 @@ public class PlayerPowers : MonoBehaviour
     public Rigidbody2D selectedPlatform;
 
     private RaycastHit2D movingGroundCheck;
-    private PlayerData playerData;
     private Rigidbody2D rb;
     private Transform tf;
     
     void Start()
     {
-        playerData = GetComponent<PlayerData>();
         rb = GetComponent<Rigidbody2D>();
         tf = GetComponent<Transform>();
     }
@@ -24,28 +22,28 @@ public class PlayerPowers : MonoBehaviour
     void Update()
     {
         //reverse gravity
-        if (Input.GetKeyDown(KeyCode.C) && playerData.canReverseGravity)
+        if (Input.GetKeyDown(KeyCode.C) && PlayerData.canReverseGravity)
         {
             rb.gravityScale = -1 * rb.gravityScale;
-            playerData.isFacedUp = !playerData.isFacedUp;
+            PlayerData.isFacedUp = !PlayerData.isFacedUp;
         }
         //reverse gravity
 
         //shrink
-        if (Input.GetKeyDown(KeyCode.R) && playerData.isShrinked && playerData.canShrink)
+        if (Input.GetKeyDown(KeyCode.R) && PlayerData.isShrinked && PlayerData.canShrink)
         {
             tf.DOScale(new Vector3(1, 1, 1), 1f);
-            playerData.isShrinked = false;
+            PlayerData.isShrinked = false;
         }
-        else if (Input.GetKeyDown(KeyCode.R) && !playerData.isShrinked && playerData.canShrink)
+        else if (Input.GetKeyDown(KeyCode.R) && !PlayerData.isShrinked && PlayerData.canShrink)
         {
             tf.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1f);
-            playerData.isShrinked = true;
+            PlayerData.isShrinked = true;
         }
         //shrink
         
         //move platform
-        if (IsMovingGrounded() && playerData.canMovePlatforms)
+        if (IsMovingGrounded() && PlayerData.canMovePlatforms)
         {
             selectedPlatform = movingGroundCheck.rigidbody;
         }
@@ -59,26 +57,26 @@ public class PlayerPowers : MonoBehaviour
 
     private bool IsMovingGrounded()
     {
-        if (playerData.isFacedUp)
+        if (PlayerData.isFacedUp)
         {
             movingGroundCheck = Physics2D.Raycast(feet.position, Vector2.up, 0.1f);
         }
         
         else
         {
-            movingGroundCheck = Physics2D.Raycast(feet.position, Vector2.down, 0.1f);
+            movingGroundCheck = Physics2D.Raycast(new Vector2(feet.position.x, feet.position.y + 0.02f), Vector2.down, 0.1f);
         }
         
         if (movingGroundCheck.collider != null)
         {
-            playerData.isMovingGrounded = movingGroundCheck.collider.CompareTag("MovingGround");
+            PlayerData.isMovingGrounded = movingGroundCheck.collider.CompareTag("MovingGround");
         }
         
         else
         {
-            playerData.isMovingGrounded = false;
+            PlayerData.isMovingGrounded = false;
         }
 
-        return playerData.isMovingGrounded;
+        return PlayerData.isMovingGrounded;
     }
 }

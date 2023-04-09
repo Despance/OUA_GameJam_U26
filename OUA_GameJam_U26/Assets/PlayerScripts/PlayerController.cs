@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float runningJumpSpeed;
     [SerializeField] private int extraJumpCountLimit;
     [SerializeField] private Transform feet;
-    [SerializeField] private PlayerData playerData;
     
     private float moveInput;
     private float speed;
@@ -38,37 +37,37 @@ public class PlayerController : MonoBehaviour
         //state calculation
         if (moveInput != 0)
         {
-            playerData.isIdle = false;
-            playerData.isWalking = true;
-            playerData.isRunning = false;
+            PlayerData.isIdle = false;
+            PlayerData.isWalking = true;
+            PlayerData.isRunning = false;
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                playerData.isWalking = false;
-                playerData.isRunning = true;
+                PlayerData.isWalking = false;
+                PlayerData.isRunning = true;
             }
             
             if (moveInput == 1f)
             {
-                playerData.isFacedRight = true; 
+                PlayerData.isFacedRight = true; 
             }
 
             else
             {
-                playerData.isFacedRight = false;
+                PlayerData.isFacedRight = false;
             }
         }
 
-        else if (!playerData.isJumping)
+        else if (!PlayerData.isJumping)
         {
-            playerData.isIdle = true;
-            playerData.isWalking = false;
-            playerData.isRunning = false;
+            PlayerData.isIdle = true;
+            PlayerData.isWalking = false;
+            PlayerData.isRunning = false;
         }
         //state calculation
         
         //jump speed modifier
-        if (playerData.isShrinked)
+        if (PlayerData.isShrinked)
         {
             speedModifier = speedModifierDefault * 0.5f;
         }
@@ -80,7 +79,7 @@ public class PlayerController : MonoBehaviour
         //jump speed modifier
 
         //ground check
-        if (playerData.isFacedUp)
+        if (PlayerData.isFacedUp)
         {
             feet.localPosition = new Vector3(0, 0.8f, 0);
         }
@@ -90,7 +89,7 @@ public class PlayerController : MonoBehaviour
             feet.localPosition = new Vector3(0, -0.8f, 0);
         }
         
-        playerData.isGrounded = Physics2D.OverlapBox(feet.position, feet.localScale, 0);
+        PlayerData.isGrounded = Physics2D.OverlapBox(feet.position, feet.localScale, 0);
         //ground check
 
         //jump buffer
@@ -106,11 +105,11 @@ public class PlayerController : MonoBehaviour
         //jump buffer
         
         //coyote time
-        if (playerData.isGrounded)
+        if (PlayerData.isGrounded)
         {
             coyoteTimer = coyoteTimeLimit;
             extraJumpCounter = extraJumpCountLimit; //extra jump
-            playerData.isJumping = false; //jump state
+            PlayerData.isJumping = false; //jump state
         }
         
         else
@@ -120,9 +119,9 @@ public class PlayerController : MonoBehaviour
         //coyote time
         
         //jump
-        if (coyoteTimer > 0f && jumpBufferTimer > 0f && playerData.canJump)
+        if (coyoteTimer > 0f && jumpBufferTimer > 0f && PlayerData.canJump)
         {
-            if (playerData.isFacedUp)
+            if (PlayerData.isFacedUp)
             {
                 rb.velocity = new Vector2(rb.velocity.x, -1 * jumpSpeed * speedModifier);
             }
@@ -132,17 +131,17 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * speedModifier);
             }
 
-            playerData.jumpSound = true; //sound state
-            playerData.isJumping = true; //jump state
-            playerData.isIdle = false;  //jump state
+            PlayerData.jumpSound = true; //sound state
+            PlayerData.isJumping = true; //jump state
+            PlayerData.isIdle = false;  //jump state
         }
         //jump
         
         //extra jump
-        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer <= 0 && playerData.canExtraJump && extraJumpCounter > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer <= 0 && PlayerData.canExtraJump && extraJumpCounter > 0)
         {
             
-            if (playerData.isFacedUp)
+            if (PlayerData.isFacedUp)
             {
                 rb.velocity = new Vector2(rb.velocity.x, -1.25f * jumpSpeed * speedModifier);
             }
@@ -152,13 +151,13 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * speedModifier);
             }
 
-            playerData.extraJumpSound = true; //sound state
+            PlayerData.extraJumpSound = true; //sound state
             extraJumpCounter--;
         }
         //extra jump
 
         //running
-        if (Input.GetKey(KeyCode.LeftShift) && playerData.canRun)
+        if (Input.GetKey(KeyCode.LeftShift) && PlayerData.canRun)
         {
             speed = runningSpeed;
             jumpSpeed = runningJumpSpeed;
