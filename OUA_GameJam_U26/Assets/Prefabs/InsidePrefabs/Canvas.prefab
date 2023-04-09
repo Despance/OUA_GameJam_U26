@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c70b2a24baa13c42988bd06115878dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bengiCoinDamage: {fileID: 0}
 --- !u!1 &7098586615416587467
 GameObject:
   m_ObjectHideFlags: 0
