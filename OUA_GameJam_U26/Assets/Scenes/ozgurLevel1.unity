@@ -310,7 +310,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.4375, y: 0.5102339, z: 0}
   m_MaxChunkCount: 16
@@ -4193,7 +4193,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 33
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -6311,11 +6311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1485773862460660691, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.05
+      value: -16.82
       objectReference: {fileID: 0}
     - target: {fileID: 1485773862460660691, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.06
+      value: -1.77
       objectReference: {fileID: 0}
     - target: {fileID: 1485773862460660691, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6352,6 +6352,22 @@ PrefabInstance:
     - target: {fileID: 1485773862460660700, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
       propertyPath: m_Name
       value: PlayerParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015453430302582636, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.0300007
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015453430302582636, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0900002
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015453431102883100, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015453431102883100, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcb42fd534847be4892d68cf3a908a32, type: 3}
