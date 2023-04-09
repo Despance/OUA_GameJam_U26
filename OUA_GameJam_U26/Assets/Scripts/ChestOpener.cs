@@ -6,10 +6,12 @@ public class ChestOpener : MonoBehaviour
 {
     public GameObject ChestClose,ChestOpen;
 
+    private int totalCoins = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        totalCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
         ChestClose.SetActive(true);
         ChestOpen.SetActive(false);
     }
@@ -22,13 +24,15 @@ public class ChestOpener : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("TotalCoins: "+totalCoins);
         if (collision.CompareTag("Player"))
-
         {
-            collision.GetComponent<DialogueManager>().openChest();
-            ChestClose.SetActive(false);
-            ChestOpen.SetActive(true);
-            
+            if (totalCoins == collision.transform.parent.GetComponentInChildren<CoinManager>().ToplamPuan)
+            {
+                collision.GetComponent<DialogueManager>().openChest();
+                ChestClose.SetActive(false);
+                ChestOpen.SetActive(true);
+            }
         }
     }
     /*
