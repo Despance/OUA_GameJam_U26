@@ -27,6 +27,7 @@ public class ChestOpener : MonoBehaviour
         {
             ChestClose.SetActive(false);
             ChestOpen.SetActive(true);
+            
         }
     }
 

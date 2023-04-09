@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class DialogueManager : MonoBehaviour
     private RectTransform _transform;
     public Transform dialogueObject;
 
-    public string dialogueText;
+    private string dialogueText;
     public float textSpeed = 15f;
     private TextMeshProUGUI textBox;
-    public static int dialogueIndex = 0;
+    static int dialogueIndex = 0;
 
    
     void Start()
@@ -57,7 +58,24 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    
+    public void winDialogue(int levelIndex)
+    {
+        dialogueStarted = true;
+        string text = "";
+        DOTween.To(() => text, x => text = x, winStrings[levelIndex], winStrings[levelIndex].Length / textSpeed).SetEase(Ease.Linear)
+            .OnUpdate(() => { textBox.text = text; }).OnComplete(()=>{});
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    private string[] winStrings =
+    {
+        "kötü kalpli dinozorun testini geçtin. öğrendiklerini kullanarak yeni bir güç edindin: artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
+        "bölüm sonu akademi: seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. öğrendiklerini kullanarak yeni bir güç daha edindin: artık bir oyunda nasıl koşulur onu biliyorsun. koşarken daha uzun mesafelere zıplayabilirsin.",
+        "tüm bu akademi maceranda yeni bir gücün var. artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. öğrendiğin kodları yaz ve R tuşu ile büyüyüp küçül.",
+        "kötü kalpli dinozorun vakti dolmak üzere. eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla."
+    };
+
+
     private string[] dialogueStrings =
     {
         "Prefabler aynı sahne veya proje içinde yeniden kullanılabilir oyun nesneleri oluşturmak için geliştirilmiş bir sistemdir.",
