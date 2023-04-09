@@ -9,7 +9,9 @@ public class EnemyManager : MonoBehaviour
     public float hiz, deger;
     public Transform Git, Gel;
     bool PlayerCollider = false;
-    
+    public AudioSource audiSource;
+    public AudioClip[] voices;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,8 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log(other.gameObject.name);
             other.gameObject.GetComponent<BengiCoinDamage>().getDamage(damage);
-            
+            audiSource.PlayOneShot(voices[0]);
+
         }
 
        // if (other.gameObject.tag == "GitGel")
