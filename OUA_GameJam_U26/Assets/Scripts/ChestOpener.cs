@@ -25,16 +25,17 @@ public class ChestOpener : MonoBehaviour
         if (collision.CompareTag("Player"))
 
         {
-            collision.GetComponent<DialogueManager>().winDialogue();
+            collision.GetComponent<DialogueManager>().openChest();
             ChestClose.SetActive(false);
             ChestOpen.SetActive(true);
             
         }
     }
-
+    /*
     void OnTriggerExit2D(Collider2D collision)
     {
         ChestClose.SetActive(true);
         ChestOpen.SetActive(false);
     }
+    */
 }

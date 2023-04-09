@@ -16,8 +16,10 @@ public class DialogueManager : MonoBehaviour
     public float textSpeed = 15f;
     private TextMeshProUGUI textBox;
     static int dialogueIndex = 0;
-    public static bool gameFinished = false; 
+    public static bool gameFinished = false;
 
+    [SerializeField]
+    private Sprite[] _fairySprites;
    
     void Start()
     {
@@ -67,10 +69,19 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    public void winDialogue()
+    public void openChest()
     {
-        gameFinished = true;
         DOTween.KillAll();
+        gameFinished = true;
+        Transform winObject = GameObject.FindWithTag("Chest").transform.GetChild(1);
+        dialogueObject = winObject.GetChild(1).GetChild(0);
+        textBox = winObject.GetComponentInChildren<TextMeshProUGUI>();
+        winObject.GetChild(0).GetComponent<SpriteRenderer>().sprite =
+            _fairySprites[Random.Range(0, _fairySprites.Length)];
+        winObject.GetChild(0).DOLocalMove(new Vector3(0, 2.5f, 0), 0.5f).OnComplete(winDialogue);
+    }
+    private void winDialogue()
+    {
         dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
         int levelIndex = SceneManager.GetActiveScene().buildIndex-1;
         dialogueStarted = true;
