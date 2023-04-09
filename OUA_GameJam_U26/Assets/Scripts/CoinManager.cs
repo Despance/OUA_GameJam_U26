@@ -61,7 +61,7 @@ public class CoinManager : MonoBehaviour
     public void PuanArtir(int puan,Vector3 ToplanacakPos)
     {
         ToplamPuan += puan;
-        audiSource.PlayOneShot(voices[0]);
+        //audiSource.PlayOneShot(voices[0]);
         CoinText.text = ToplamPuan.ToString();
         CoinlereHareketVer(ToplanacakPos, 7);
     }
