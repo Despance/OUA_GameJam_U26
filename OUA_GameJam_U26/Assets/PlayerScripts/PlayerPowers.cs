@@ -64,7 +64,7 @@ public class PlayerPowers : MonoBehaviour
         
         else
         {
-            movingGroundCheck = Physics2D.Raycast(new Vector2(feet.position.x, feet.position.y + 0.02f), Vector2.down, 0.1f);
+            movingGroundCheck = Physics2D.Raycast(feet.position, Vector2.down, 0.1f);
         }
         
         if (movingGroundCheck.collider != null)

@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     [Header("Assign")]
     [SerializeField] private float speedDefault;
     [SerializeField] private float jumpSpeedDefault;
-    [SerializeField] private float speedModifierDefault = 2f;
+    [SerializeField] private float speedModifierDefault = 1f;
     [SerializeField] private float runningSpeed;
     [SerializeField] private float runningJumpSpeed;
     [SerializeField] private int extraJumpCountLimit;
