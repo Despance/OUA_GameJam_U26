@@ -16,6 +16,10 @@ public class PlayerData : MonoBehaviour
     public bool isRunning; //player controller
     public bool isWalking; //player controller
     public bool isIdle;    //player controller
+
+    [Header("Sound States")]
+    public bool jumpSound;
+    public bool extraJumpSound;
     
     [Header("Non Animated States")]
     public bool isMovingGrounded; //player powers

@@ -131,7 +131,8 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed * speedModifier);
             }
-            
+
+            playerData.jumpSound = true;
             playerData.isJumping = true; //jump state
             playerData.isIdle = false;  //jump state
         }
@@ -150,6 +151,8 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, 1.25f * jumpSpeed * speedModifier);
             }
+
+            playerData.extraJumpSound = true;
             extraJumpCounter--;
         }
         //extra jump
