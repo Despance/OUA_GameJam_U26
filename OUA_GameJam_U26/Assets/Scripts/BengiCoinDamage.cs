@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BengiCoinDamage : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class BengiCoinDamage : MonoBehaviour
     //checkpoint - özgür
     private PlayerCheckpoint playerCheckpoint;
     public bool damageTaken;
+
+    private DialogueManager _dialogueManager;
     //checkpoint - özgür
 
     private void Awake()
@@ -21,6 +24,7 @@ public class BengiCoinDamage : MonoBehaviour
         playerCheckpoint = GetComponent<PlayerCheckpoint>();
         rb = GetComponent<Rigidbody2D>();
         _coinManager = FindObjectOfType<CoinManager>();
+        _dialogueManager = GetComponent<DialogueManager>();
     }
 
     // Start is called before the first frame update
@@ -55,6 +59,7 @@ public class BengiCoinDamage : MonoBehaviour
     {
         if(health == 0)
         {
+            GameObject.FindWithTag("Slider").GetComponent<Slider>().value += 2;
             dead = true;
         }
     }
@@ -65,7 +70,7 @@ public class BengiCoinDamage : MonoBehaviour
         if(col.CompareTag("Coin"))
         {
             _coinManager.PuanArtir(1,col.transform.position);
-           
+            _dialogueManager.showDialogue();
             Destroy(col.gameObject);
             
             //checkpoint - özgür

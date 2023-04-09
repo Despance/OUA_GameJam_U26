@@ -5,6 +5,8 @@ public class PlayerSoundController : MonoBehaviour
     [Header("Assign")]
     [SerializeField] private AudioSource jumpSource;
     [SerializeField] private AudioSource extraJumpSource;
+    [SerializeField] private AudioClip jumpSound;
+    
 
     void LateUpdate()
     {
@@ -12,12 +14,7 @@ public class PlayerSoundController : MonoBehaviour
         {
             jumpSource.Play();
             PlayerData.jumpSound = false;
-        }
-
-        if (PlayerData.extraJumpSound)
-        {
-            extraJumpSource.Play();
-            PlayerData.extraJumpSound = false;
+            
         }
     }
 }

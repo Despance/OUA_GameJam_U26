@@ -25,8 +25,10 @@ public class ChestOpener : MonoBehaviour
         if (collision.CompareTag("Player"))
 
         {
+            collision.GetComponent<DialogueManager>().winDialogue();
             ChestClose.SetActive(false);
             ChestOpen.SetActive(true);
+            
         }
     }
 

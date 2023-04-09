@@ -2,32 +2,32 @@ using UnityEngine;
 
 public class PlayerPowerGiver : MonoBehaviour
 {
-    public void GiveJump()
+    public static void GiveJump()
     {
         PlayerData.canJump = true;
     }
 
-    public void GiveRun()
+    public static void GiveRun()
     {
         PlayerData.canRun = true;
     }
 
-    public void GiveExtraJump()
+    public static void GiveExtraJump()
     {
         PlayerData.canExtraJump = true;
     }
 
-    public void GiveReverseGravity()
+    public static void GiveReverseGravity()
     {
         PlayerData.canReverseGravity = true;
     }
 
-    public void GiveShrink()
+    public static void GiveShrink()
     {
         PlayerData.canShrink = true;
     }
 
-    public void GiveMovePlatforms()
+    public static void GiveMovePlatforms()
     {
         PlayerData.canMovePlatforms = true;
     }
