@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 6520763178236678970}
   - component: {fileID: 1880178340}
   - component: {fileID: 1880178342}
+  - component: {fileID: 6520763177070663588}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -562,8 +563,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af4bab6dde4fc4448ce6c42aab16316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   dead: 0
   kirazkontrol: {fileID: 6520763176719527401}
+  damageTaken: 0
+--- !u!114 &6520763177070663588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6520763178236678963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c8bfa48292c7144bb0d8ae880f9f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoint: {x: 0, y: 0}
+  livesArray:
+  - {fileID: 4106536726776983953}
+  - {fileID: 8616021476730258084}
+  - {fileID: 8616021477839971750}
 --- !u!1 &6520763178333607288
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,6 +692,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 829917199}
     m_Modifications:
+    - target: {fileID: 2076376605, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
+      propertyPath: bengiCoinDamage
+      value: 
+      objectReference: {fileID: 1880178342}
     - target: {fileID: 3309062078435423829, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -819,6 +843,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7098586615416587479, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
   m_PrefabInstance: {fileID: 6520763178502214644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4106536726776983953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7098586615625376357, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
+  m_PrefabInstance: {fileID: 6520763178502214644}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6520763176719527401 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2076376605, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
@@ -846,3 +875,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8616021476730258084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3309062079540269392, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
+  m_PrefabInstance: {fileID: 6520763178502214644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8616021477839971750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3309062078435423826, guid: 26a3a1fda82deda448c44e5d07cdbedf, type: 3}
+  m_PrefabInstance: {fileID: 6520763178502214644}
+  m_PrefabAsset: {fileID: 0}

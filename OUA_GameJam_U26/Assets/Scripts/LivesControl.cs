@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class LivesControl : MonoBehaviour
 {
+    [Header("Assign")]
+    [SerializeField] private BengiCoinDamage bengiCoinDamage;
+    //health artık static olmadığı için düzenledim - özgür
+    
     public void kirazyokolma()
     {
-        switch (BengiCoinDamage.health)
+        switch (bengiCoinDamage.health) //health artık static olmadığı için düzenledim - özgür
         {
             case 3:
                 gameObject.transform.GetChild(2).gameObject.SetActive(false);

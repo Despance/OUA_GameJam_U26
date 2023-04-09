@@ -5,14 +5,20 @@ using UnityEngine;
 
 public class BengiCoinDamage : MonoBehaviour
 {
-    public static float health = 3;
+    public float health = 3; //static olmasına gerek yok - özgür
     public bool dead = false;
     public LivesControl kirazkontrol ;
     private CoinManager _coinManager;
     private Rigidbody2D rb;
+    
+    //checkpoint - özgür
+    private PlayerCheckpoint playerCheckpoint;
+    public bool damageTaken;
+    //checkpoint - özgür
 
     private void Awake()
     {
+        playerCheckpoint = GetComponent<PlayerCheckpoint>();
         rb = GetComponent<Rigidbody2D>();
         _coinManager = FindObjectOfType<CoinManager>();
     }
@@ -30,6 +36,10 @@ public class BengiCoinDamage : MonoBehaviour
     }
     public void getDamage(float damage)
     {
+        //checkpoint - özgür
+        damageTaken = true;
+        //checkpoint - özgür
+        
         kirazkontrol.kirazyokolma();
         if (health - damage >= 0)
         {
@@ -57,6 +67,10 @@ public class BengiCoinDamage : MonoBehaviour
             _coinManager.PuanArtir(1,col.transform.position);
            
             Destroy(col.gameObject);
+            
+            //checkpoint - özgür
+            playerCheckpoint.checkpoint = col.transform.position;
+            //checkpoint - özgür
         }
     }
 }
