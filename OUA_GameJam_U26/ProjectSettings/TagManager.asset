@@ -13,6 +13,8 @@ TagManager:
   - MovingPlatformRight
   - MovingPlatformLeft
   - Coin
+  - Slider
+  - Chest
   layers:
   - Default
   - TransparentFX

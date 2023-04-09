@@ -12,15 +12,18 @@ public class DialogueManager : MonoBehaviour
     private RectTransform _transform;
     public Transform dialogueObject;
 
-    private string dialogueText;
+    private string dialogueText ;
     public float textSpeed = 15f;
     private TextMeshProUGUI textBox;
     static int dialogueIndex = 0;
+    public static bool gameFinished = false; 
 
    
     void Start()
     {
+        gameFinished = false;
         textBox = dialogueObject.GetComponentInChildren<TextMeshProUGUI>();
+        dialogueText = dialogueStrings[dialogueIndex];
     }
 
     // Update is called once per frame
@@ -35,31 +38,41 @@ public class DialogueManager : MonoBehaviour
         showText();
     }
 
-    public void showText()
+    private void showText()
     {
         if (!dialogueStarted)
         {
             dialogueStarted = true;
             string text = "";
             DOTween.To(() => text, x => text = x, dialogueText, dialogueText.Length / textSpeed).SetEase(Ease.Linear)
-                .OnUpdate(() => { textBox.text = text; });
+                .OnUpdate(() => { textBox.text = text; }).OnComplete(()=>
+                {
+                    Invoke(nameof(hideDialogue), 2f);
+                });
         }
 
     }
 
     public void hideDialogue()
     {
-        dialogueObject.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InOutExpo).OnComplete((() =>
+        if (dialogueStarted)
         {
-            dialogueText = dialogueStrings[++dialogueIndex];
-            dialogueStarted = false;
-        }));
+            dialogueObject.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InOutExpo).OnComplete((() =>
+            {
+                dialogueText = dialogueStrings[++dialogueIndex];
+                dialogueStarted = false;
+            }));
+        }
+        
         
     }
 
     public void winDialogue()
     {
-        int levelIndex = SceneManager.GetActiveScene().buildIndex;
+        gameFinished = true;
+        DOTween.KillAll();
+        dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
+        int levelIndex = SceneManager.GetActiveScene().buildIndex-1;
         dialogueStarted = true;
         string text = "";
         DOTween.To(() => text, x => text = x, winStrings[levelIndex], winStrings[levelIndex].Length / textSpeed).SetEase(Ease.Linear)
@@ -67,34 +80,44 @@ public class DialogueManager : MonoBehaviour
             {
                 switch (levelIndex)
                 {
-                    case 1:
-                        PlayerPowerGiver.GiveRun();
-                        break;
-                    case 2: 
-                        PlayerPowerGiver.GiveExtraJump();
-                        break;
-                    case 3:
+                    case 0:
                         PlayerPowerGiver.GiveReverseGravity();
                         break;
-                    case 4:
+                    case 1: 
                         PlayerPowerGiver.GiveShrink();
                         break;
+                    case 2:
+                        PlayerPowerGiver.GiveRun();
+                        break;
+                    case 3:
+                        //Coming soon.
+                        break;
                 }
-                
+                Invoke(nameof(hideDialogueWin),3);
             });
         
         
-        SceneManager.LoadScene(levelIndex+1);
+        
+    }
+    
+    public void hideDialogueWin()
+    {
+        dialogueObject.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InOutExpo).OnComplete((() =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1); 
+        }));
+        
     }
 
-    
     private string[] winStrings =
     {
-        "bölüm sonu akademi: seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. öğrendiklerini kullanarak yeni bir güç daha edindin: artık bir oyunda nasıl koşulur onu biliyorsun. koşarken daha uzun mesafelere zıplayabilirsin.",
-        "kötü kalpli dinozorun vakti dolmak üzere. eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla.",
-            "kötü kalpli dinozorun testini geçtin. öğrendiklerini kullanarak yeni bir güç edindin: artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
-        "tüm bu akademi maceranda yeni bir gücün var. artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. öğrendiğin kodları yaz ve R tuşu ile büyüyüp küçül."
+        "Kötü kalpli dinozorun testini geçtin. Öğrendiklerini kullanarak yeni bir güç edindin: Artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. Öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
+        "Tüm bu akademi maceranda yeni bir gücün var. Artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. Öğrendiğin kodları yaz ve \"R\" tuşu ile büyüyüp küçül.",
+        "Seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. Öğrendiklerini kullanarak yeni bir güç daha edindin: Artık bir oyunda nasıl koşulur onu biliyorsun. Koşarken daha uzun mesafelere zıplayabilirsin.",
+        "Kötü kalpli dinozorun vakti dolmak üzere. Eğitimlerinde çok başarılısın ve artık bir oyunda nasıl çift zıplanır biliyorsun. Öğrendiğin kodları yaz ve havadayken space tuşuna basarak bir kez daha zıpla.",
+        
     };
+
 
 
     private string[] dialogueStrings =
