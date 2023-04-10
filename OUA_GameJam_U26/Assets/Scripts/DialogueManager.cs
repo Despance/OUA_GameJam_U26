@@ -133,6 +133,7 @@ public class DialogueManager : MonoBehaviour
         "Tebrikler ilk bölümü bitirdin. Öğrendiklerini kullanarak yeni bir güç edindin: Artık bir oyunda yer çekimi nasıl tersine çevrilir biliyorsun. Öğrendiğin kodları yaz ve C tuşu ile yerçekimini tersine çevir.",
         "Tüm bu akademi maceranda yeni bir gücün var. Artık bir oyunda bir nesnenin boyutu nasıl ayarlanır biliyorsun. Öğrendiğin kodları yaz ve \"R\" tuşu ile büyüyüp küçül.",
         "Seninle gurur duyuyorum. yerçekimini çok iyi öğrendin. Öğrendiklerini kullanarak yeni bir güç daha edindin: Artık bir oyunda nasıl koşulur onu biliyorsun. Koşarken daha uzun mesafelere zıplayabilirsin.",
+        "Harika gidiyorsun. Sona çok yaklaştın. Kendini hazır hissediyorsan son göreve başlayabilirsin.",
         "Tebrikler akademiyi başarıyla tamamladın. Sertifikanı bir sonraki bölümde alabilirsin. Akademinin bir parçası olduğun için teşekkürler.",
         
     };

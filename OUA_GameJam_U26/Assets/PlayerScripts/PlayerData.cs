@@ -5,11 +5,11 @@ public class PlayerData : MonoBehaviour
     
     [Header("Abilities")]
     public static bool canJump = true;
-    public static bool canRun = true;
+    public static bool canRun = false;
     public static bool canExtraJump = false;
-    public static bool canReverseGravity = true;
-    public static bool canShrink = true;
-    public static bool canMovePlatforms = true;
+    public static bool canReverseGravity = false;
+    public static bool canShrink = false;
+    public static bool canMovePlatforms = false;
 
     [Header("Animation States")]
     public static bool isFacedRight; //player controller
