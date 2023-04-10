@@ -1,4 +1,4 @@
-# OUA_GameJam_U26
+# OUA_GameJam_U26 - Candy Academy
 Bengüsu Karpuzoğlu</br>
 Fatma Şahiner</br>
 Mustafa Emir Uyar</br>
