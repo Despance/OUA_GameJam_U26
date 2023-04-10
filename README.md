@@ -20,6 +20,5 @@ https://pixabay.com/tr/sound-effects/8bittownthemesong-59266/</br>
 https://pixabay.com/tr/sound-effects/fast-simple-chop-5-6270/</br>
 https://pixabay.com/tr/sound-effects/punch-kick-46882/</br>
 https://www.freepik.com/free-vector/magical-fairies-icon-set-purple-background_29171412.htm#query=fairy%20sprite&position=37&from_view=keyword&track=ais</br>
-Open Shot Video Editor</br>
 GIMP</br>
 Canva
