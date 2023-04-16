@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     {
         dialogueObject.transform.localScale = Vector3.zero;
         fairy.DOLocalMove(fairy.position +new Vector3(0,fairyPosition,0),fairySpeed).SetLoops(-1, LoopType.Yoyo);
-        dialogueObject.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo).OnComplete(
+        dialogueObject.DOScale(new Vector3(0.082f, 0.082f, 0.082f), 0.5f).SetEase(Ease.InOutExpo).OnComplete(
             () =>
             {
                 string text = "";
